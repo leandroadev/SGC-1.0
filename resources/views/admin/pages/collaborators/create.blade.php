@@ -7,13 +7,27 @@
 
 <form action="{{ route('collaborators.store') }}" method="post">
         @csrf
-        <input type="text" name="cpf" placeholder="CPF:">
-        <input type="text" name="name" placeholder="Nome:">
-        <input type="text" name="email" placeholder="E-mail:">
-        <input type="text" name="telephone" placeholder="Telefone:">
-        <input type="date" name="birth" placeholder="Data de nascimento:">
-        <input type="text" name="address" placeholder="Endereço:">
-        <button type="submit">Enviar</button>
+        <div class="form-group">
+            <input type="text" class="form-control" name="cpf" placeholder="CPF:">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="name" placeholder="Nome:">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="email" placeholder="E-mail:">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="telephone" placeholder="Telefone:">
+        </div>
+        <div class="form-group">
+            <input type="date" class="form-control" name="birth" placeholder="Data de nascimento:">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="address" placeholder="Endereço:">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Enviar</button>
+        </div>
     </form>
 
 @endsection

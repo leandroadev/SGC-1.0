@@ -4,9 +4,9 @@
 
 @section('content')
     <h1>Exibindo os colaboradores</h1>
-    <a href="{{ route('collaborators.create') }}">Cadastrar</a>
+    <a href="{{ route('collaborators.create') }}" class="btn btn-primary">Cadastrar</a>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>CPF</th>
