@@ -3,16 +3,30 @@
 @section('title', "Detalhes do colaborador {$collaborator->name}")
 
 @section('content')
-
-<h1>Colaborador {{ $collaborator->name }} <a href="{{ route('collaborators.index') }}"><<</a></h1>
-
-<ul>
-    <li><strong>CPF: </strong>{{ $collaborator->cpf }}</li>
-    <li><strong>Nome: </strong>{{ $collaborator->name }}</li>
-    <li><strong>E-mail: </strong>{{ $collaborator->email }}</li>
-    <li><strong>Telefone: </strong>{{ $collaborator->telephone }}</li>
-    <li><strong>Data de nascimento: </strong>{{ $collaborator->birth }}</li>
-    <li><strong>Endereço: </strong>{{ $collaborator->address }}</li>
-</ul>
+<div class="row">
+    <div class="col-sm">
+        <h1>Colaborador: {{ $collaborator->name }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm">
+        <ul class="list-group">
+            <li class="list-group-item"><strong>CPF: </strong>{{ $collaborator->cpf }}</li>
+            <li class="list-group-item"><strong>Nome: </strong>{{ $collaborator->name }}</li>
+            <li class="list-group-item"><strong>E-mail: </strong>{{ $collaborator->email }}</li>
+            <li class="list-group-item"><strong>Telefone: </strong>{{ $collaborator->telephone }}</li>
+            <li class="list-group-item"><strong>Data de nascimento: </strong>{{ $collaborator->birth }}</li>
+            <li class="list-group-item"><strong>Endereço: </strong>{{ $collaborator->address }}</li>
+        </ul>
+    </div>
+</div>
+<div>
+    <form action="{{ route('collaborators.destroy', $collaborator->id) }}" method="post">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger">Deletar</button>
+        <a href="{{ route('collaborators.index') }}" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>
 
 @endsection

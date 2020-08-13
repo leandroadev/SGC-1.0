@@ -28,6 +28,7 @@
                     <td>{{ $collaborator->birth }}</td>
                     <td>{{ $collaborator->address }}</td>
                     <td>
+                        <a href="{{ route('collaborators.edit', $collaborator) }}">Editar</a>
                         <a href="{{ route('collaborators.show', $collaborator) }}">Detalhes</a>
                     </td>
                 </tr>

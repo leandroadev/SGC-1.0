@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collaborator;
+use App\Http\Requests\StoreUpdateCollaboratorRequest;
 use Illuminate\Http\Request;
 
 class CollaboratorsController extends Controller
@@ -44,9 +45,12 @@ class CollaboratorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateCollaboratorRequest $request)
     {
-        dd('Cadastrando...');
+        $data = $request->only('cpf', 'name', 'email', 'telephone', 'birth', 'address');
+        $collaborator = Collaborator::create($data);
+
+        return redirect()->route('collaborators.index');
     }
 
     /**
@@ -74,7 +78,10 @@ class CollaboratorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(!$collaborator = Collaborator::find($id))
+            return redirect()->back();
+
+        return view('admin.pages.collaborators.edit', compact('collaborator'));    
     }
 
     /**
@@ -86,7 +93,12 @@ class CollaboratorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(!$collaborator = Collaborator::find($id))
+            return redirect()->back();
+
+        $collaborator->update($request->all());
+        
+        return redirect()->route('collaborators.index');
     }
 
     /**
@@ -97,6 +109,12 @@ class CollaboratorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $collaborator = Collaborator::where('id', $id)->first();
+        if(!$collaborator)
+            return redirect()->back();
+        
+        $collaborator->delete();
+
+        return redirect()->route('collaborators.index');
     }
 }
