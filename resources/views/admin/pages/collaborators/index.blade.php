@@ -6,6 +6,12 @@
     <h1>Exibindo os colaboradores</h1>
     <a href="{{ route('collaborators.create') }}" class="btn btn-primary">Cadastrar</a>
 
+    <form action="{{ route('collaborators.search') }}" method="post" class="form form-inline">
+        @csrf
+        <input type="text" name="filter" placeholder="Filtrar:" class="form-control" value="{{ $filters['filter'] ?? ""}}">
+        <button type="submit" class="btn btn-info">Pesquisar</button>
+    </form>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -36,6 +42,10 @@
         </tbody>
     </table>
 
-    {!! $collaborators->links() !!} <!--Paginação-->
+    @if(isset($filters))
+        {!! $collaborators->appends($filters)->links() !!} <!--Paginação-->
+    @else
+        {!! $collaborators->links() !!} <!--Paginação-->
+    @endif
 
 @endsection

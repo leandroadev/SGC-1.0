@@ -10,10 +10,12 @@ class CollaboratorsController extends Controller
 {
 
     protected $request;
+    private $repository;
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Collaborator $collaborator)
     {
         $this->request = $request;
+        $this->repository = $collaborator;
     }
 
     /**
@@ -116,5 +118,20 @@ class CollaboratorsController extends Controller
         $collaborator->delete();
 
         return redirect()->route('collaborators.index');
+    }
+
+    /**
+    * Search Collaborators
+    */
+
+    public function search(Request $request)
+    {
+        $filters = $request->except('_token');
+        $collaborators = $this->repository->search($request->filter);
+
+        return view('admin.pages.collaborators.index', [
+            'collaborators' => $collaborators,
+            'filters' => $filters,
+        ]);
     }
 }
